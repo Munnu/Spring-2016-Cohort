@@ -123,7 +123,7 @@ def job_title_and_name_sender(name, sender, job_title='Engineer'):
 #    function will take a number and append it to *numbers*. It doesn't
 #    need to return anything.
 def append_to_nums(num):
-  nums = []
+  nums = [1, 2]
   nums.append(num)
   print nums
 
