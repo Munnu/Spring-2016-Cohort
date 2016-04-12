@@ -52,17 +52,20 @@ def random_restaurant(restaurants_ratings):
     random_num = 0
 
     while True:
-        random_num = randint(0, len(restaurant_name) - 1)
+        random_num = random.randint(0, len(restaurant_name) - 1)
         random_restaurant = restaurant_name[random_num]
-        print random_restaurant, restaurants_ratings[random_restaurant]
-        new_rating = raw_input("Please enter a new rating for this restaurant: ")
+
+        print "\nRandom restaurant:", random_restaurant, restaurants_ratings[random_restaurant]
+        new_rating = raw_input("\nPlease enter a new rating for this restaurant: ")
+
         print "Type 'q' if you would like to quit"
+        
         if new_rating == 'q':
             break
         else:
             new_rating = int(new_rating)
             restaurants_ratings[random_restaurant] = new_rating
-
+            print_restaurants(restaurant_name, restaurants_ratings)
 
 
 
@@ -75,6 +78,10 @@ restaurants_and_ratings = {}
 restaurant_ratings_from_file('scores.txt')
 user_name = raw_input("Hi, what is your name? ")
 
-# new_restaurant(restaurants_and_ratings)
+update_or_create_restaurant = int(raw_input("Press 1 to add a new restaurant listing?\n" +
+                                        "Press 2 to update a random listing's rating? "))
+if update_or_create_restaurant == 1:
+  new_restaurant(restaurants_and_ratings)
 
-random_restaurant(restaurants_and_ratings)
+elif update_or_create_restaurant == 2:
+  random_restaurant(restaurants_and_ratings)
