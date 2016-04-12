@@ -16,7 +16,7 @@ def print_restaurants(sorted_restaurants, restaurants_and_ratings):
 
 
 
-def restaurant_ratings_from_file(filename):
+def restaurant_ratings_from_file(filename, restaurants_and_ratings):
     """Pulls restaurants and ratings from file"""
 
     restaurant_file = open(filename)
@@ -30,58 +30,55 @@ def restaurant_ratings_from_file(filename):
 
 # Take user input for new restaurant and rating, adds to dictionary, sorts, prints
 def new_restaurant(restaurants_ratings):
-    """Takes user input for new restaurant/rating
+        """Takes user input for new restaurant/rating
+            Adds to restaurants_and_ratings, calls sorted_restaurants 
+            and print_restaurants"""
 
-         Adds to restaurants_and_ratings, calls sorted_restaurants and print_restaurants"""
-    new_restaurant_name = ''
-    new_restaurant_rating = ''
-    while True:
         new_restaurant_name = raw_input("Please enter a restaurant name: ").capitalize()
         new_restaurant_rating = raw_input("Please enter a numerical rating: ")
-        if new_restaurant_name == 'q' or new_restaurant_rating == 'q':
-            break
-        else:
-            restaurants_ratings[new_restaurant_name] = int(new_restaurant_rating)
 
-            sorted_restaurants = sort_restaurants(restaurants_and_ratings)
-            print_restaurants(sorted_restaurants, restaurants_and_ratings)
+        restaurants_ratings[new_restaurant_name] = int(new_restaurant_rating)
+
+        sorted_restaurants = sort_restaurants(restaurants_ratings)
+        print_restaurants(sorted_restaurants, restaurants_ratings)
 
 
 def random_restaurant(restaurants_ratings):
     restaurant_name = list(restaurants_ratings)
     random_num = 0
 
-    while True:
-        random_num = random.randint(0, len(restaurant_name) - 1)
-        random_restaurant = restaurant_name[random_num]
+    random_num = random.randint(0, len(restaurant_name) - 1)
+    random_restaurant = restaurant_name[random_num]
 
-        print "\nRandom restaurant:", random_restaurant, restaurants_ratings[random_restaurant]
-        new_rating = raw_input("\nPlease enter a new rating for this restaurant: ")
+    print "\nRandom restaurant:", random_restaurant, restaurants_ratings[random_restaurant]
+    new_rating = raw_input("\nPlease enter a new rating for this restaurant: ")
 
-        print "Type 'q' if you would like to quit"
-        
-        if new_rating == 'q':
-            break
-        else:
-            new_rating = int(new_rating)
-            restaurants_ratings[random_restaurant] = new_rating
-            print_restaurants(restaurant_name, restaurants_ratings)
-
+    new_rating = int(new_rating)
+    restaurants_ratings[random_restaurant] = new_rating
+    print_restaurants(restaurant_name, restaurants_ratings)
 
 
 # -------------------------------------------------------------------
 # Initialize dictionary and variables
 # -------------------------------------------------------------------
-restaurants_and_ratings = {}
+def init_program():
+    restaurants_and_ratings = {}
+    update_or_create_restaurant = '' 
 
-# Add restaurants from file to dictionary
-restaurant_ratings_from_file('scores.txt')
-user_name = raw_input("Hi, what is your name? ")
+    # Add restaurants from file to dictionary
+    restaurant_ratings_from_file('scores.txt', restaurants_and_ratings)
+    user_name = raw_input("Hi, what is your name? ")
+    
 
-update_or_create_restaurant = int(raw_input("Press 1 to add a new restaurant listing?\n" +
-                                        "Press 2 to update a random listing's rating? "))
-if update_or_create_restaurant == 1:
-  new_restaurant(restaurants_and_ratings)
+    while update_or_create_restaurant != 'q':
+        update_or_create_restaurant = raw_input("\nPress 'n' to add a new restaurant listing?\n" +
+                                            "Press any key to update a random listing's rating?\n " +
+                                            "Type 'q' if you would like to quit\n")
+        if update_or_create_restaurant == 'n':
+          new_restaurant(restaurants_and_ratings)
+        elif update_or_create_restaurant == 'q':
+          break
+        else:
+          random_restaurant(restaurants_and_ratings)
 
-elif update_or_create_restaurant == 2:
-  random_restaurant(restaurants_and_ratings)
+init_program()
