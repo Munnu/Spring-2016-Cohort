@@ -1,0 +1,8 @@
+# Secrets for your Twitter app
+#
+# This file should never go into github!
+
+export TWITTER_CONSUMER_KEY="y1Q13S3iLs0cmEy8gaZvfihVA"
+export TWITTER_CONSUMER_SECRET="9mY4gNhC0zFNIVTEjGfh4zsLE3mYFDtgzGGRtdwp2xmswk144f"
+export TWITTER_ACCESS_TOKEN_KEY="720385977135407104-TZoRUeUU3LFaH0vbBdvTenHIDnpD3zA"
+export TWITTER_ACCESS_TOKEN_SECRET="PM0jRsqHO9kF23OCsUTYQik6n6T9wB3jUgN8igF2xvsKV"
